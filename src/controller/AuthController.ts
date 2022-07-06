@@ -21,9 +21,9 @@ export class AuthController {
         }
 
         const token = sign({ id: user.id }, process.env.JWTTOKEN_SECRET as string, { expiresIn: "1d" });
+        //@ts-ignore
+        const { id, role } = user;
 
-        const { id } = user;
-
-        return res.json({ user: { id, email }, token })
+        return res.json({ user: { id, email, role }, token })
     }
 }

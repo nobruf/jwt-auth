@@ -10,7 +10,7 @@ export class UserController {
     }
 
     async store(req: Request, res: Response){
-        const { name, email, password } = req.body;
+        const { name, email, role, password } = req.body;
 
         const userExists = await prisma.user.findUnique({ where: { email }});
 
@@ -22,7 +22,9 @@ export class UserController {
         const user = await prisma.user.create({
             data:{
                 name, 
-                email, 
+                email,
+                //@ts-ignore 
+                role,
                 password: hash_password,
             },
         });
